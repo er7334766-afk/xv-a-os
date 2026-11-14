@@ -28,7 +28,15 @@ dd{font-size:clamp(15px,1.6vw,19px)}
 dd span{display:block;font-size:clamp(12px,1.3vw,15px);font-style:italic}
 aside{margin-top:clamp(12px,2vw,20px);background:#f5e4e5;border-radius:10px;padding:clamp(12px,2vw,18px);font-size:clamp(14px,1.5vw,17px)}
 aside p{margin:2px 0}
-.intro{position:fixed;inset:0;z-index:20;display:grid;place-items:center;overflow:hidden;color:#fff4e8;background:radial-gradient(ellipse at 50% 43%,#8c476d,#32142f 72%);animation:intro-exit 1.4s ease-in-out 3.6s forwards}
+.intro{position:fixed;inset:0;z-index:20;display:grid;place-items:center;overflow:hidden;color:#fff4e8;background:radial-gradient(ellipse at 50% 43%,#8c476d,#32142f 72%);animation:intro-exit 1.4s ease-in-out 3.6s forwards;animation-play-state:paused}
+body.invitation-started .intro{animation-play-state:running}
+.start-screen{position:fixed;inset:0;z-index:30;display:grid;place-items:center;padding:24px;text-align:center;color:#fff4e8;background:radial-gradient(ellipse at 50% 43%,#8c476d,#32142f 72%);transition:opacity .7s ease,visibility .7s ease}
+.start-content{display:grid;justify-items:center;gap:14px;max-width:440px}
+.start-content p{margin:0;color:#f4ce9c;font:700 12px system-ui;letter-spacing:.3em;text-transform:uppercase}
+.start-content h1{margin:0;color:#ffe4b2;font-size:clamp(48px,12vw,76px);font-weight:400;font-style:italic}
+.start-content button{border:1px solid #e4ba87;border-radius:28px;padding:14px 28px;background:#fff2e519;color:#fff6e8;font:600 16px system-ui;cursor:pointer}
+.start-content button:focus-visible{outline:2px solid white;outline-offset:4px}
+.start-screen.is-leaving{opacity:0;visibility:hidden;pointer-events:none}
 .intro-message{position:relative;z-index:1;display:grid;justify-items:center;text-align:center;text-shadow:0 3px 24px #17091488}
 .intro-message span:first-child{color:#f4ce9c;font:700 12px system-ui;letter-spacing:.35em;text-transform:uppercase;animation:intro-fade .8s ease both}
 .intro-message strong{font-size:clamp(150px,42vw,280px);font-weight:400;line-height:.9;letter-spacing:-.08em;color:#ffe4b2;animation:intro-title 1s cubic-bezier(.16,1,.3,1) both}
@@ -49,7 +57,14 @@ aside p{margin:2px 0}
 <span>Gabriela</span>
 </div>
 </div>
-<main>
+<div class="start-screen" role="dialog" aria-modal="true" aria-labelledby="start-title">
+<div class="start-content">
+<p>Una invitación especial</p>
+<h1 id="start-title">XV años de Gabriela</h1>
+<button id="start-invitation" type="button">♫ Toca aquí para entrar</button>
+</div>
+</div>
+<main aria-hidden="true">
 <header>
 <p>XV AÑOS</p>
 <h1>Gabriela</h1>
@@ -84,11 +99,14 @@ aside p{margin:2px 0}
 </aside>
 </section>
 </main>
-<audio id="bg-music" src="musica.mp3" autoplay loop preload="auto"></audio>
-<button id="music-start" type="button">♫ Tocar para escuchar música</button>
+<audio id="bg-music" src="musica.mp3" loop preload="auto"></audio>
+<button id="music-start" type="button" hidden>♫ Tocar para escuchar música</button>
 <script>
 const audio = document.getElementById('bg-music');
 const musicStart = document.getElementById('music-start');
+const startScreen = document.querySelector('.start-screen');
+const startInvitation = document.getElementById('start-invitation');
+const invitation = document.querySelector('main');
 
 audio.addEventListener('playing', () => {
   musicStart.hidden = true;
@@ -99,16 +117,22 @@ audio.addEventListener('error', () => {
   musicStart.textContent = 'No se pudo cargar la canción';
 });
 
+startInvitation.addEventListener('click', () => {
+  const playback = audio.play();
+  invitation.removeAttribute('aria-hidden');
+  document.body.classList.add('invitation-started');
+  startScreen.classList.add('is-leaving');
+  playback.catch(error => {
+    console.warn('No se pudo iniciar la música al abrir la invitación.', error);
+    musicStart.hidden = false;
+  });
+});
+
 musicStart.addEventListener('click', () => {
   audio.play().catch(error => {
     console.error('No se pudo reproducir la canción.', error);
     musicStart.textContent = 'No se pudo reproducir la canción';
   });
-});
-
-audio.play().catch(error => {
-  console.warn('El navegador requiere una interacción para reproducir la música.', error);
-  musicStart.hidden = false;
 });
 </script>
 </html>
