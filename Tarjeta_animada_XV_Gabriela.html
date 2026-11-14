@@ -38,23 +38,18 @@ body.invitation-started .intro{animation-play-state:running}
 .start-content button:focus-visible{outline:2px solid white;outline-offset:4px}
 .start-screen.is-leaving{opacity:0;visibility:hidden;pointer-events:none}
 .intro-message{position:relative;z-index:1;display:grid;justify-items:center;text-align:center;text-shadow:0 3px 24px #17091488}
-.intro-message span:first-child{color:#f4ce9c;font:700 12px system-ui;letter-spacing:.35em;text-transform:uppercase;animation:intro-fade .8s ease both}
 .intro-message strong{font-size:clamp(150px,42vw,280px);font-weight:400;line-height:.9;letter-spacing:-.08em;color:#ffe4b2;animation:intro-title 1s cubic-bezier(.16,1,.3,1) both}
-.intro-message span:last-child{font-size:clamp(25px,6vw,42px);font-style:italic;animation:intro-fade .8s .25s ease both}
 @keyframes intro-exit{to{opacity:0;visibility:hidden;transform:scale(1.05);filter:blur(6px)}}
 @keyframes intro-exit-reduced{to{opacity:0;visibility:hidden}}
-@keyframes intro-fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 @keyframes intro-title{from{opacity:0;transform:scale(.45)}to{opacity:1;transform:scale(1)}}
 @media(prefers-reduced-motion:reduce){.art,.spark{animation:none}}
-@media(prefers-reduced-motion:reduce){.intro{animation-name:intro-exit-reduced}.intro-message strong,.intro-message span{animation:none}}
+@media(prefers-reduced-motion:reduce){.intro{animation-name:intro-exit-reduced}.intro-message strong{animation:none}}
 @media(max-width:520px){body{padding:10px}main{border-radius:18px}header{min-height:210px}h1{font-size:clamp(42px,11vw,56px)}section{padding-right:6%;padding-left:6%}}
 @media(max-height:850px) and (min-width:521px){body{padding-top:12px;padding-bottom:12px}header{min-height:170px;padding-top:20px;padding-bottom:20px}section{padding-top:16px;padding-bottom:16px}h2{margin-bottom:6px}dt,dd{padding-top:6px;padding-bottom:6px}aside{margin-top:10px;padding:10px 12px}}
 </style>
 <div class="intro" aria-hidden="true">
 <div class="intro-message">
-<span>Una noche especial</span>
 <strong>XV</strong>
-<span>Gabriela</span>
 </div>
 </div>
 <div class="start-screen" role="dialog" aria-modal="true" aria-labelledby="start-title">
