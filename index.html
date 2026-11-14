@@ -2,7 +2,132 @@
 <html lang="es">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="refresh" content="0; url=Tarjeta_animada_XV_Gabriela.html">
 <title>XV años de Gabriela</title>
-<p><a href="Tarjeta_animada_XV_Gabriela.html">Abrir la invitación de Gabriela</a></p>
+<style>
+*{box-sizing:border-box}
+body{display:grid;place-items:safe center;min-height:100vh;margin:0;padding:clamp(10px,2.4vw,36px);background:#200f23;color:#452340;font:15px/1.4 Georgia,serif}
+main{width:100%;max-width:min(900px,72vh);margin:auto;overflow:hidden;border:1px solid #c59b69;border-radius:22px;background:#fff8ef;box-shadow:0 14px 48px #09040d88}
+header{position:relative;overflow:hidden;min-height:clamp(180px,22vw,300px);padding:clamp(30px,5vw,52px) 0 clamp(30px,4vw,42px) 8%;color:#fff5e6;background:radial-gradient(ellipse at 78% 85%,#8c476d,#43203f 68%);isolation:isolate}
+header p{margin:0;color:#f4ce9c;letter-spacing:.32em;font:700 clamp(12px,1.3vw,15px) system-ui}
+h1{font-size:clamp(44px,6vw,76px);font-weight:400;font-style:italic;margin:1px 0 16px;line-height:1.1}
+.art{position:absolute;right:2%;bottom:0;width:39%;height:100%;object-fit:contain;object-position:center bottom;z-index:-1;animation:arrive 1.2s ease-out both}
+.spark{position:absolute;color:#ffe0a9;animation:glow 2.8s ease-in-out infinite alternate;pointer-events:none}
+#bg-music{position:fixed;left:-9999px;bottom:-9999px;width:1px;height:1px;opacity:0;pointer-events:none;overflow:hidden;z-index:-10}
+#music-start{position:fixed;left:50%;bottom:22px;z-index:10;transform:translateX(-50%);border:1px solid #e4ba87;border-radius:24px;padding:12px 20px;background:#43203f;color:#fff6e8;font:600 14px system-ui;box-shadow:0 4px 18px #09040d66;cursor:pointer}
+#music-start[hidden]{display:none}
+#music-start:focus-visible{outline:2px solid #f4ce9c;outline-offset:3px}
+@keyframes glow{from{opacity:.25;transform:scale(.65)}to{opacity:1;transform:scale(1.15)}}
+@keyframes arrive{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+section{padding:clamp(20px,3.5vw,34px) 7% clamp(22px,3vw,30px)}
+h2{margin:0 0 10px;font-size:clamp(25px,3.2vw,36px);font-weight:400}
+small{font:700 clamp(10px,1.2vw,13px) system-ui;letter-spacing:.15em;color:#80522f}
+dl{margin:0;display:grid;grid-template-columns:max-content minmax(0,1fr);column-gap:clamp(14px,2.4vw,24px)}
+dt,dd{margin:0;padding:clamp(8px,1.2vw,12px) 0;border-top:1px solid #ebd9c9}
+dt{font:700 clamp(12px,1.35vw,15px)/1.7 system-ui;color:#80522f;white-space:nowrap}
+dd{font-size:clamp(15px,1.6vw,19px)}
+dd span{display:block;font-size:clamp(12px,1.3vw,15px);font-style:italic}
+aside{margin-top:clamp(12px,2vw,20px);background:#f5e4e5;border-radius:10px;padding:clamp(12px,2vw,18px);font-size:clamp(14px,1.5vw,17px)}
+aside p{margin:2px 0}
+.intro{position:fixed;inset:0;z-index:20;display:grid;place-items:center;overflow:hidden;color:#fff4e8;background:radial-gradient(ellipse at 50% 43%,#8c476d,#32142f 72%);animation:intro-exit 1.4s ease-in-out .6s forwards;animation-play-state:paused}
+body.invitation-started .intro{animation-play-state:running}
+.start-screen{position:fixed;inset:0;z-index:30;display:grid;place-items:center;padding:24px;text-align:center;color:#fff4e8;background:radial-gradient(ellipse at 50% 43%,#8c476d,#32142f 72%);transition:opacity .7s ease,visibility .7s ease}
+.start-content{display:grid;justify-items:center;gap:14px;max-width:440px}
+.start-content p{margin:0;color:#f4ce9c;font:700 12px system-ui;letter-spacing:.3em;text-transform:uppercase}
+.start-content h1{margin:0;color:#ffe4b2;font-size:clamp(48px,12vw,76px);font-weight:400;font-style:italic}
+.start-content button{border:1px solid #e4ba87;border-radius:28px;padding:14px 28px;background:#fff2e519;color:#fff6e8;font:600 16px system-ui;cursor:pointer}
+.start-content button:focus-visible{outline:2px solid white;outline-offset:4px}
+.start-screen.is-leaving{opacity:0;visibility:hidden;pointer-events:none}
+.intro-message{position:relative;z-index:1;display:grid;justify-items:center;text-align:center;text-shadow:0 3px 24px #17091488}
+.intro-message strong{font-size:clamp(150px,42vw,280px);font-weight:400;line-height:.9;letter-spacing:-.08em;color:#ffe4b2;animation:intro-title 1s cubic-bezier(.16,1,.3,1) both}
+@keyframes intro-exit{to{opacity:0;visibility:hidden;transform:scale(1.05);filter:blur(6px)}}
+@keyframes intro-exit-reduced{to{opacity:0;visibility:hidden}}
+@keyframes intro-title{from{opacity:0;transform:scale(.45)}to{opacity:1;transform:scale(1)}}
+@media(prefers-reduced-motion:reduce){.art,.spark{animation:none}}
+@media(prefers-reduced-motion:reduce){.intro{animation-name:intro-exit-reduced}.intro-message strong{animation:none}}
+@media(max-width:520px){body{padding:10px}main{border-radius:18px}header{min-height:210px}h1{font-size:clamp(42px,11vw,56px)}section{padding-right:6%;padding-left:6%}}
+@media(max-height:850px) and (min-width:521px){body{padding-top:12px;padding-bottom:12px}header{min-height:170px;padding-top:20px;padding-bottom:20px}section{padding-top:16px;padding-bottom:16px}h2{margin-bottom:6px}dt,dd{padding-top:6px;padding-bottom:6px}aside{margin-top:10px;padding:10px 12px}}
+</style>
+<div class="intro" aria-hidden="true">
+<div class="intro-message">
+<strong>XV</strong>
+</div>
+</div>
+<div class="start-screen" role="dialog" aria-modal="true" aria-labelledby="start-title">
+<div class="start-content">
+<p>Una invitación especial</p>
+<h1 id="start-title">XV años de Gabriela</h1>
+<button id="start-invitation" type="button">♫ Toca aquí para entrar</button>
+</div>
+</div>
+<main aria-hidden="true">
+<header>
+<p>XV AÑOS</p>
+<h1>Gabriela</h1>
+<svg class="art" viewBox="0 0 160 155" role="img" aria-label="Ilustración de una quinceañera con vestido rosa y tiara">
+<defs><linearGradient id="skirt" x2="1" y2=".65"><stop stop-color="#aa527b"/><stop offset=".52" stop-color="#f2acc0"/><stop offset="1" stop-color="#b9638f"/></linearGradient></defs>
+<path fill="#2b1629" d="M66 38Q59 11 78 10Q99 8 94 37L98 54Q78 63 62 53Z"/>
+<path fill="#eeb397" d="M71 25Q78 24 88 20Q93 38 82 42L83 48L93 51L105 78L100 80L89 59H71L59 80L54 78L65 51L76 47V41Q69 36 71 25Z"/>
+<path fill="#f3ce8d" d="M69 16L68 10L74 13L79 5L84 12L91 9L89 16Z"/>
+<path fill="url(#skirt)" d="M66 50Q74 48 79 54Q86 47 94 50L87 73Q102 90 114 108Q126 125 149 142Q116 153 80 149Q42 154 12 142Q38 124 47 109Q60 87 73 73Z"/>
+<path fill="none" stroke="#fff1dd" stroke-opacity=".55" d="M78 75Q65 109 47 145M81 77Q82 111 81 147M85 76Q98 115 117 145M72 73Q80 76 88 73"/>
+<g fill="#ffe6ae"><circle cx="61" cy="115" r="2"/><circle cx="103" cy="121" r="1.8"/><circle cx="77" cy="99" r="1.4"/><circle cx="38" cy="137" r="1.4"/><circle cx="126" cy="138" r="1.8"/></g>
+</svg>
+<span class="spark" aria-hidden="true" style="right:35%;top:18%">✦</span>
+<span class="spark" aria-hidden="true" style="right:6%;top:21%;animation-delay:.8s">✧</span>
+<span class="spark" aria-hidden="true" style="right:31%;top:47%;animation-delay:1.4s">✧</span>
+</header>
+<section aria-labelledby="programa">
+<h2 id="programa">Programa <small>HORARIO PM</small></h2>
+<dl>
+<dt>5:00–6:30</dt><dd>Sesión privada de fotos</dd>
+<dt>7:00</dt><dd>Llegada de Christopher a la cena</dd>
+<dt>7:00–7:30</dt><dd>Fotos con la quinceañera y su vestido<span>Zona del restaurante Isabela</span></dd>
+<dt>7:30–8:00</dt><dd>Palabras de bienvenida y oración de acción de gracias por los XV años de Gabi</dd>
+<dt>8:00–8:45</dt><dd>Cena en honor a Gabi</dd>
+<dt>9:00–9:30</dt><dd>Entrega de presentes</dd>
+<dt>9:30–10:00</dt><dd>Las Mañanitas y corte del pastel</dd>
+<dt>Al finalizar</dt><dd>Brindis y palabras de agradecimiento</dd>
+</dl>
+<aside>
+<strong>Una cartita para Gabi</strong>
+<p>Cada invitado a la cena debe preparar una carta o tarjetita que pueda leerse en público. El regalo es opcional.</p>
+</aside>
+</section>
+</main>
+<audio id="bg-music" src="musica.mp3" loop preload="auto"></audio>
+<button id="music-start" type="button" hidden>♫ Tocar para escuchar música</button>
+<script>
+const audio = document.getElementById('bg-music');
+const musicStart = document.getElementById('music-start');
+const startScreen = document.querySelector('.start-screen');
+const startInvitation = document.getElementById('start-invitation');
+const invitation = document.querySelector('main');
+
+audio.addEventListener('playing', () => {
+  musicStart.hidden = true;
+});
+
+audio.addEventListener('error', () => {
+  musicStart.hidden = false;
+  musicStart.textContent = 'No se pudo cargar la canción';
+});
+
+startInvitation.addEventListener('click', () => {
+  const playback = audio.play();
+  invitation.removeAttribute('aria-hidden');
+  document.body.classList.add('invitation-started');
+  startScreen.classList.add('is-leaving');
+  playback.catch(error => {
+    console.warn('No se pudo iniciar la música al abrir la invitación.', error);
+    musicStart.hidden = false;
+  });
+});
+
+musicStart.addEventListener('click', () => {
+  audio.play().catch(error => {
+    console.error('No se pudo reproducir la canción.', error);
+    musicStart.textContent = 'No se pudo reproducir la canción';
+  });
+});
+</script>
 </html>
